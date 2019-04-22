@@ -1,4 +1,4 @@
-package campos.util;
+package util;
 
 import javafx.geometry.Pos;
 import javafx.scene.Node;
