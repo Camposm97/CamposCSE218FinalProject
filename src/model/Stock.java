@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.GregorianCalendar;
 
+@SuppressWarnings("serial")
 public class Stock implements Serializable {
 	private GregorianCalendar gCal;
 	private double openValue;

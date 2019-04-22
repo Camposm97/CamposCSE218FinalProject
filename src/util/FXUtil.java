@@ -1,13 +1,21 @@
 package util;
 
+import java.util.LinkedList;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart.Data;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import model.Company;
+import model.Stock;
 
 public class FXUtil {
-	private static final Insets DEFAULT_INSETS = new Insets(10);
+	public static final Insets DEFAULT_INSETS = new Insets(10);
 	
 	/**
 	 * Returns a VBox with 10 spacing and Alignment set to Center
@@ -33,5 +41,27 @@ public class FXUtil {
 		for (Node e : nodes)
 			hBox.getChildren().add(e);
 		return hBox;
+	}
+	
+	public static LineChart<Number, Number> loadStockChart(Company c) {
+		final NumberAxis xAxis = new NumberAxis();
+		xAxis.setLabel("Day");
+		final NumberAxis yAxis = new NumberAxis();
+		yAxis.setLabel("Stock Price");
+		
+		Series<Number, Number> series = new Series<>();
+		LinkedList<Stock> stockList = c.getStockList();
+		
+		for (int i = 0; i < stockList.size(); i++) {
+			Stock s = stockList.get(i);
+			Data<Number, Number> data = new Data<>(i, s.getOpenValue());
+			series.getData().add(data);
+		}
+		
+		series.setName(c.getName());
+		
+		LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
+		lineChart.getData().add(series);
+		return lineChart;
 	}
 }
