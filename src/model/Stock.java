@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
-public class Stock {
+public class Stock implements Serializable {
 	private GregorianCalendar gCal;
 	private double openValue;
 	private double highValue;
@@ -23,50 +24,24 @@ public class Stock {
 		return gCal;
 	}
 
-
-
-	public void setgCal(GregorianCalendar gCal) {
-		this.gCal = gCal;
-	}
-
 	public double getOpenValue() {
 		return openValue;
-	}
-
-	public void setOpenValue(double openValue) {
-		this.openValue = openValue;
 	}
 
 	public double getHighValue() {
 		return highValue;
 	}
 
-	public void setHighValue(double highValue) {
-		this.highValue = highValue;
-	}
-
 	public double getLowValue() {
 		return lowValue;
-	}
-
-	public void setLowValue(double lowValue) {
-		this.lowValue = lowValue;
 	}
 
 	public double getCloseValue() {
 		return closeValue;
 	}
 
-	public void setCloseValue(double closeValue) {
-		this.closeValue = closeValue;
-	}
-
 	public int getVolume() {
 		return volume;
-	}
-
-	public void setVolume(int volume) {
-		this.volume = volume;
 	}
 
 	@Override

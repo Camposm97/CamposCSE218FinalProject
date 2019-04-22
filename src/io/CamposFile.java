@@ -10,10 +10,10 @@ import java.util.Scanner;
  * and access the data through methods.  
  * @author Camposm97
  */
-public class MyFile {
+public class CamposFile {
 	private LinkedList<String> contentList;
 	
-	public MyFile(String src) {
+	public CamposFile(String src) {
 		contentList = new LinkedList<>();
 		try {
 			Scanner input = new Scanner(new File(src));
