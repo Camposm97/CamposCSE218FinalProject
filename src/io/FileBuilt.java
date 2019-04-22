@@ -10,13 +10,25 @@ import java.util.Scanner;
  * and access the data through methods.  
  * @author Camposm97
  */
-public class CamposFile {
+public class FileBuilt {
 	private LinkedList<String> contentList;
 	
-	public CamposFile(String src) {
+	public FileBuilt(String src) {
+		readFile(new File(src));
+	}
+	
+	public FileBuilt(File file) {
+		readFile(file);
+	}
+	
+	public LinkedList<String> getContentList() {
+		return contentList;
+	}
+	
+	private void readFile(File file) {
 		contentList = new LinkedList<>();
 		try {
-			Scanner input = new Scanner(new File(src));
+			Scanner input = new Scanner(file);
 			while (input.hasNextLine()) {
 				contentList.add(input.nextLine());
 			}
@@ -24,9 +36,5 @@ public class CamposFile {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public LinkedList<String> getContentList() {
-		return contentList;
 	}
 }

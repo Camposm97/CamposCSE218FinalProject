@@ -11,10 +11,10 @@ import java.util.LinkedList;
 
 import model.Stock;
 
-public class DataUtil {
-	public static final String DAILY_AAPL = "systemData/csv/daily_AAPL.csv"; 
-	public static final String DAILY_AMZN = "systemData/csv/daily_AMZN.csv";
-	private static final String BIN_SRC = "systemData/dat/";
+public class DataOperator {
+	public static final String DAILY_AAPL = "systemData/alphaVantage/daily_AAPL.csv"; 
+	public static final String DAILY_AMZN = "systemData/alphaVantage/daily_AMZN.csv";
+	private static final String BIN_SRC = "systemData/stockHistory/";
 	private static final String DELIMITER = ",";
 	
 	public static void main(String[] args) {
@@ -56,8 +56,9 @@ public class DataUtil {
 	 * @param src
 	 */
 	public static LinkedList<Stock> readAlphaVantageFile(String src) {
-		CamposFile file = new CamposFile(src);
-		LinkedList<String> contentList = file.getContentList();
+		File file = new File(src);
+		FileBuilt fileBuilt = new FileBuilt(file);
+		LinkedList<String> contentList = fileBuilt.getContentList();
 		LinkedList<Stock> stockList = new LinkedList<>();
 		
 		// Set i = 1 to skip first element of contentList (labels)
@@ -67,7 +68,7 @@ public class DataUtil {
 			Stock stock = readTokens(tokens);
 			stockList.add(stock);
 		}
-		System.out.println("Successfully loaded " + src);
+		System.out.println("Successfully read from " + file);
 		return stockList;
 	}
 	
