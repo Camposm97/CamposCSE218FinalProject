@@ -1,11 +1,11 @@
 package scene.layout;
 
 import javafx.scene.chart.LineChart;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.BorderPane;
 import model.Company;
 import util.FXUtil;
 
-public class StockViewerPane extends StackPane {
+public class StockViewerPane extends BorderPane {
 	private Company c;
 	private LineChart<Number, Number> lineChart;
 	
@@ -17,6 +17,6 @@ public class StockViewerPane extends StackPane {
 	
 	private void displayControls() {
 		this.setPadding(FXUtil.DEFAULT_INSETS);
-		this.getChildren().add(lineChart);
+		this.setCenter(lineChart);
 	}
 }
