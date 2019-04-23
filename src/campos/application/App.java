@@ -1,14 +1,14 @@
-package application;
+package campos.application;
 
+import campos.stage.CamposStage;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import scene.MainWindow;
 
 public class App extends Application {
 	@Override
 	public void start(Stage stage) {
-		MainWindow main = new MainWindow(stage);
-		main.display();
+		stage = new CamposStage();
+		stage.show();
 	}
 	
 	public static void main(String[] args) {

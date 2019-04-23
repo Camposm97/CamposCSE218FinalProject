@@ -2,12 +2,12 @@ package workbench;
 
 import java.util.LinkedList;
 
-import io.DataOperator;
+import campos.io.DataOperator;
+import campos.model.Company;
+import campos.scene.layout.StockViewerPane;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.Company;
-import scene.layout.StockViewerPane;
 
 public class StockViewerDemo extends Application {
 	public static void main(String[] args) {

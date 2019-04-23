@@ -1,10 +1,10 @@
-package model;
+package campos.model;
 
 import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 @SuppressWarnings("serial")
-public class Stock implements Serializable {
+public class Stock implements Comparable<Stock>, Serializable {
 	private GregorianCalendar gCal;
 	private double openValue;
 	private double highValue;
@@ -49,5 +49,10 @@ public class Stock implements Serializable {
 	public String toString() {
 		return "Stock [gCal=" + gCal.getTime() + ", openValue=" + openValue + ", highValue=" + highValue + ", lowValue="
 				+ lowValue + ", closeValue=" + closeValue + ", volume=" + volume + "]";
+	}
+
+	@Override
+	public int compareTo(Stock s) {
+		return gCal.compareTo(s.gCal);
 	}
 }

@@ -1,10 +1,10 @@
-package scene.layout;
+package campos.scene.layout;
 
 import java.util.LinkedList;
 
+import campos.model.Company;
+import campos.scene.control.MyMenuBar;
 import javafx.scene.layout.BorderPane;
-import model.Company;
-import scene.control.MyMenuBar;
 
 public class MyBorderPane extends BorderPane {
 	private MyMenuBar menuBar;

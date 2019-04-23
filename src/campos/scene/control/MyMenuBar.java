@@ -1,11 +1,11 @@
-package scene.control;
+package campos.scene.control;
 
 import java.util.LinkedList;
 
+import campos.model.Company;
+import campos.util.MenuFactory;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
-import model.Company;
-import util.MenuFactory;
 
 public class MyMenuBar extends MenuBar {	
 	public MyMenuBar(LinkedList<Company> list) {

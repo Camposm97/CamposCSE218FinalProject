@@ -1,4 +1,4 @@
-package model;
+package campos.model;
 
 import java.io.Serializable;
 import java.util.LinkedList;

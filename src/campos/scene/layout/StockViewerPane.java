@@ -1,9 +1,9 @@
-package scene.layout;
+package campos.scene.layout;
 
+import campos.model.Company;
+import campos.util.FXUtil;
 import javafx.scene.chart.LineChart;
 import javafx.scene.layout.BorderPane;
-import model.Company;
-import util.FXUtil;
 
 public class StockViewerPane extends BorderPane {
 	private Company c;

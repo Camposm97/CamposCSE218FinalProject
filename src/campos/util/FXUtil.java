@@ -1,7 +1,9 @@
-package util;
+package campos.util;
 
 import java.util.LinkedList;
 
+import campos.model.Company;
+import campos.model.Stock;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -11,8 +13,6 @@ import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import model.Company;
-import model.Stock;
 
 public class FXUtil {
 	public static final Insets DEFAULT_INSETS = new Insets(10);

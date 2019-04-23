@@ -1,4 +1,4 @@
-package io;
+package campos.io;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,8 +9,8 @@ import java.io.ObjectOutputStream;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
-import model.Company;
-import model.Stock;
+import campos.model.Company;
+import campos.model.Stock;
 
 public class DataOperator {
 	public static final String DAILY_AAPL = "systemData/alphaVantage/daily_AAPL.csv"; 
