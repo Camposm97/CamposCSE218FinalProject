@@ -30,7 +30,10 @@ public class MenuFactory {
 	private static void impFileItems(Menu menu) {
 		MenuItem miExit = new MenuItem("Exit");
 		miExit.setOnAction(e -> {
-			AlertFactory.emitAlertExit();
+			boolean flag = AlertFactory.emitAlertExit();
+			if (flag) {
+				Platform.exit();
+			}
 		});
 		menu.getItems().addAll(miExit);
 	}
@@ -47,7 +50,7 @@ public class MenuFactory {
 	}
 
 	private static void impOpItems(Menu menu) {
-		MenuItem miInsert = new MenuItem("Add");
+		MenuItem miInsert = new MenuItem("Insert");
 		MenuItem miSearch = new MenuItem("Search");
 		menu.getItems().addAll(miInsert, miSearch);
 	}

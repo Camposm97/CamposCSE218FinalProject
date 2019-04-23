@@ -11,8 +11,11 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class FXUtil {
 	public static final Insets DEFAULT_INSETS = new Insets(10);
@@ -41,6 +44,14 @@ public class FXUtil {
 		for (Node e : nodes)
 			hBox.getChildren().add(e);
 		return hBox;
+	}
+	
+	public static StackPane loadBackground() {
+		ImageView iv = ImgUtil.loadImgV(ImgUtil.BACKGROUND_MAIN);
+		iv.setOpacity(0.25);
+		StackPane pane = new StackPane(iv);
+		pane.setPadding(new Insets(50, 200, 50, 200));
+		return pane;
 	}
 	
 	public static LineChart<Number, Number> loadStockChart(Company c) {
