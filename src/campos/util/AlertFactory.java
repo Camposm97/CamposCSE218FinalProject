@@ -2,7 +2,7 @@ package campos.util;
 
 import java.util.Optional;
 
-import campos.stage.CamposStage;
+import campos.stage.MyStage;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -12,7 +12,7 @@ import javafx.scene.control.ButtonType;
 public class AlertFactory {
 	public static Alert emitAlertExit() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle(CamposStage.TITLE);
+		alert.setTitle(MyStage.TITLE);
 		alert.setHeaderText("Are you sure you want to exit?");
 		alert.setContentText("Note: Any modifications you made to a company will be saved.");
 		
@@ -23,6 +23,7 @@ public class AlertFactory {
 		Optional<ButtonType> result = alert.showAndWait();
 		result.ifPresent(e -> {
 			if (e == btYes) {
+				// Save CompanyBag
 				Platform.exit();
 			}
 		});

@@ -10,7 +10,8 @@ import javafx.stage.Stage;
 
 public class ImgUtil {
 	public static final String ICON_MAIN = "resources/images/icons/main.png";
-
+	public static final String BACKGROUND_MAIN = "resources/images/backgrounds/background.png";
+	
 	public static void loadStageIcon(Stage stage) {
 		stage.getIcons().add(loadImg(ICON_MAIN));
 	}

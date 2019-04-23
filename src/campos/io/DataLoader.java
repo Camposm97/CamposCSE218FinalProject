@@ -2,34 +2,24 @@ package campos.io;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
 import campos.model.Company;
 import campos.model.Stock;
 
-public class DataOperator {
-	public static final String DAILY_AAPL = "systemData/alphaVantage/daily_AAPL.csv"; 
-	public static final String DAILY_AMZN = "systemData/alphaVantage/daily_AMZN.csv";
-	private static final String COMP_BAG_SRC = "systemData/companyBag.dat";
+public class DataLoader {
 	private static final String DELIMITER = ",";
-	
-	
-	public static void main(String[] args) {
-		writeObject(loadCompanyList(), COMP_BAG_SRC);
-	}
-	
+
 	/**
 	 * Returns a LinkedList containing data from companyBag.dat
 	 * @return LinkedList<Company>
 	 */
 	@SuppressWarnings("unchecked")
 	public static LinkedList<Company> loadCompanyBag() {
-		LinkedList<Company> list = (LinkedList<Company>) readObject(COMP_BAG_SRC);
+		LinkedList<Company> list = (LinkedList<Company>) readObject(FileURL.COMP_BAG_SRC);
 		System.out.println("Found " + list.size() + " Companies");
 		return list;
 	}
@@ -39,32 +29,15 @@ public class DataOperator {
 	 * @return LinkedList<Company>
 	 */
 	public static LinkedList<Company> loadCompanyList() {
-		Company compApple = new Company("Apple", readAlphaVantageFile(DAILY_AAPL));
-		Company compAmzn = new Company("Amazon", readAlphaVantageFile(DAILY_AMZN));
+		Company compApple = new Company("Apple", readAlphaVantageFile(FileURL.DAILY_AAPL));
+		Company compAmzn = new Company("Amazon", readAlphaVantageFile(FileURL.DAILY_AMZN));
 		LinkedList<Company> companyList = new LinkedList<>();
 		companyList.add(compApple);
 		companyList.add(compAmzn);
 		return companyList;
 	}
 	
-	/**
-	 * Parameter trgt should only have the file name.  The file is automatically 
-	 * stored in systemData
-	 * @param o
-	 * @param trgt
-	 */
-	public static void writeObject(Object o, String trgt) {
-		File file = new File(trgt);
-		try {
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
-			oos.writeObject(o);
-			oos.close();
-			System.out.println("Successfully wrote Object to " + file);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	
 	
 	public static Object readObject(String src) {
 		File file = new File(src);

@@ -2,7 +2,7 @@ package workbench;
 
 import java.util.LinkedList;
 
-import campos.io.DataOperator;
+import campos.io.DataLoader;
 import campos.model.Company;
 import campos.scene.layout.StockViewerPane;
 import javafx.application.Application;
@@ -16,7 +16,7 @@ public class StockViewerDemo extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		LinkedList<Company> list = DataOperator.loadCompanyBag();
+		LinkedList<Company> list = DataLoader.loadCompanyBag();
 		stage.setScene(new Scene(new StockViewerPane(list.get(0))));
 		stage.show();
 	}

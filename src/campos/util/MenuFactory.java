@@ -47,8 +47,9 @@ public class MenuFactory {
 	}
 
 	private static void impOpItems(Menu menu) {
-		MenuItem miInsert = new MenuItem("Add Stock Data");
-		menu.getItems().addAll(miInsert);
+		MenuItem miInsert = new MenuItem("Add");
+		MenuItem miSearch = new MenuItem("Search");
+		menu.getItems().addAll(miInsert, miSearch);
 	}
 
 	private static void impHelpItems(Menu menu) {
