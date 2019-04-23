@@ -10,6 +10,12 @@ import javafx.stage.Stage;
 
 public class ImgUtil {
 	public static final String ICON_MAIN = "resources/images/icons/main.png";
+	public static final String ICON_EXIT = "resources/images/icons/exit.png";
+	public static final String ICON_EXIT_BIG = "resources/images/icons/exitBig.png";
+	public static final String ICON_ABOUT = "resources/images/icons/about.png";
+	public static final String ICON_DEV = "resources/images/icons/github.png";
+	public static final String ICON_INSERT = "resources/images/icons/insert.png";
+	public static final String ICON_SEARCH = "resources/images/icons/search.png";
 	public static final String BACKGROUND_MAIN = "resources/images/backgrounds/background.png";
 	
 	public static void loadStageIcon(Stage stage) {

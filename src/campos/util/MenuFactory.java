@@ -29,6 +29,7 @@ public class MenuFactory {
 
 	private static void impFileItems(Menu menu) {
 		MenuItem miExit = new MenuItem("Exit");
+		miExit.setGraphic(ImgUtil.loadImgV(ImgUtil.ICON_EXIT));
 		miExit.setOnAction(e -> {
 			boolean flag = AlertFactory.emitAlertExit();
 			if (flag) {
@@ -51,16 +52,20 @@ public class MenuFactory {
 
 	private static void impOpItems(Menu menu) {
 		MenuItem miInsert = new MenuItem("Insert");
+		miInsert.setGraphic(ImgUtil.loadImgV(ImgUtil.ICON_INSERT));
 		MenuItem miSearch = new MenuItem("Search");
+		miSearch.setGraphic(ImgUtil.loadImgV(ImgUtil.ICON_SEARCH));
 		menu.getItems().addAll(miInsert, miSearch);
 	}
 
 	private static void impHelpItems(Menu menu) {
 		MenuItem miDev = new MenuItem("Developer's Github");
+		miDev.setGraphic(ImgUtil.loadImgV(ImgUtil.ICON_DEV));
 		miDev.setOnAction(e -> {
 			// TODO CODE
 		});
 		MenuItem miAbout = new MenuItem("About");
+		miAbout.setGraphic(ImgUtil.loadImgV(ImgUtil.ICON_ABOUT));
 		miAbout.setOnAction(e -> {
 			// TODO CODE
 		});
