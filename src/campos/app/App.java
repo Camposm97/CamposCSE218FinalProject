@@ -1,4 +1,4 @@
-package campos.application;
+package campos.app;
 
 import campos.stage.MyStage;
 import javafx.application.Application;
