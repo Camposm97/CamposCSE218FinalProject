@@ -1,17 +1,17 @@
 package camposfx.event;
 
-import campos.model.Company;
 import campos.model.ChosenOnes;
+import campos.model.Company;
 import campos.util.AlertFactory;
+import camposfx.scene.layout.StockInsertPane;
+import camposfx.scene.layout.StockSearchPane;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 public class OperationHandler implements EventHandler<ActionEvent> {
-	private Company c;
 	private String name;
 	
 	public OperationHandler(String name) {
-		this.c = ChosenOnes.chosenOne;
 		this.name = name.toUpperCase();
 	}
 	
@@ -19,25 +19,27 @@ public class OperationHandler implements EventHandler<ActionEvent> {
 	public void handle(ActionEvent event) {
 		switch(name) {
 		case "INSERT":
-			insertStockData();
+			toInsertPane();
 			break;
 		case "SEARCH":
-			searchStockData();
+			toSearchPane();
 			break;
 		}
 	}
 	
-	public void insertStockData() {
+	public void toInsertPane() {
+		Company c = ChosenOnes.company;
 		if (c != null) {
-			
+			ChosenOnes.root.setCenter(new StockInsertPane());
 		} else {
 			AlertFactory.emitError("Solution: Please select a company to insert stock data to.");
 		}
 	}
 	
-	public void searchStockData() {
+	public void toSearchPane() {
+		Company c = ChosenOnes.company;
 		if (c != null) {
-			
+			ChosenOnes.root.setCenter(new StockSearchPane());
 		} else {
 			AlertFactory.emitError("Solution: Please select a company to before searching for stock data.");
 		}

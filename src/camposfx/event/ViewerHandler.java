@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import campos.model.Company;
 import campos.model.ChosenOnes;
 import campos.model.Symbol;
+import campos.util.FXUtil;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.RadioMenuItem;
@@ -37,7 +38,7 @@ public class ViewerHandler implements EventHandler<ActionEvent> {
 			Company c = iter.next();
 			if (c.getSymbol().equals(symbol)) {
 				ChosenOnes.setCompany(c);
-				System.out.println(ChosenOnes.chosenOne);
+				ChosenOnes.root.setCenter(FXUtil.loadBackground());
 			}
 		}
 	}

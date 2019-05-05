@@ -9,6 +9,13 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 
 public class AlertFactory {
+	public static void emitAlert(String title, String header, String content) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle(title);
+		alert.setHeaderText(header);
+		alert.setContentText(content);
+		alert.showAndWait();
+	}
 	public static boolean emitExit() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle(MyStage.TITLE);

@@ -1,5 +1,6 @@
 package campos.util;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 
 import campos.model.Company;
@@ -11,6 +12,8 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
+import javafx.scene.control.DateCell;
+import javafx.scene.control.DatePicker;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -43,6 +46,19 @@ public class FXUtil {
 		for (Node e : nodes)
 			hBox.getChildren().add(e);
 		return hBox;
+	}
+	
+	public static DatePicker loadDatePicker() {
+		DatePicker datePicker = new DatePicker(LocalDate.now());
+		datePicker.setEditable(false);
+		datePicker.setDayCellFactory(e -> new DateCell() {
+			public void updateItem(LocalDate date, boolean empty) {
+	            super.updateItem(date, empty);
+	            LocalDate today = LocalDate.now();
+	            setDisable(empty || date.compareTo(today) < 0 );
+	        }
+		});
+		return datePicker;
 	}
 	
 	public static StackPane loadBackground() {
