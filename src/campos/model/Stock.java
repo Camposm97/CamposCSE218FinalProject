@@ -1,19 +1,19 @@
 package campos.model;
 
 import java.io.Serializable;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
 
 @SuppressWarnings("serial")
 public class Stock implements Comparable<Stock>, Serializable {
-	private GregorianCalendar gCal;
+	private LocalDate date;
 	private double openValue;
 	private double highValue;
 	private double lowValue;
 	private double closeValue;
 	private int volume;
 	
-	public Stock(GregorianCalendar gCal, double openValue, double highValue, double lowValue, double closeValue, int volume) {
-		this.gCal = gCal;
+	public Stock(LocalDate date, double openValue, double highValue, double lowValue, double closeValue, int volume) {
+		this.date = date;
 		this.openValue = openValue;
 		this.highValue = highValue;
 		this.lowValue = lowValue;
@@ -21,8 +21,8 @@ public class Stock implements Comparable<Stock>, Serializable {
 		this.volume = volume;
 	}
 
-	public GregorianCalendar getgCal() {
-		return gCal;
+	public LocalDate getDate() {
+		return date;
 	}
 
 	public double getOpenValue() {
@@ -46,13 +46,7 @@ public class Stock implements Comparable<Stock>, Serializable {
 	}
 
 	@Override
-	public String toString() {
-		return "Stock [gCal=" + gCal.getTime() + ", openValue=" + openValue + ", highValue=" + highValue + ", lowValue="
-				+ lowValue + ", closeValue=" + closeValue + ", volume=" + volume + "]";
-	}
-
-	@Override
 	public int compareTo(Stock s) {
-		return gCal.compareTo(s.gCal);
+		return date.compareTo(s.date);
 	}
 }

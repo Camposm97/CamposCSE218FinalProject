@@ -1,10 +1,10 @@
-package workbench;
+package campos.workbench;
 
 import java.util.LinkedList;
 
 import campos.io.DataLoader;
 import campos.model.Company;
-import campos.scene.layout.StockViewerPane;
+import camposfx.scene.layout.StockViewerPane;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

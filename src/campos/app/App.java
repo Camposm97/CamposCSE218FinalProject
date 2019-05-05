@@ -1,6 +1,6 @@
-package campos.application;
+package campos.app;
 
-import campos.stage.MyStage;
+import camposfx.stage.MyStage;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

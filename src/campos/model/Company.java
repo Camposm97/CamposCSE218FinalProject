@@ -6,6 +6,7 @@ import java.util.LinkedList;
 @SuppressWarnings("serial")
 public class Company implements Comparable<Company>, Serializable {
 	private String name;
+	private Symbol symbol;
 	private LinkedList<Stock> stockList;
 	
 	public Company(String name) {
@@ -13,13 +14,18 @@ public class Company implements Comparable<Company>, Serializable {
 		this.stockList = new LinkedList<>();
 	}
 	
-	public Company(String name, LinkedList<Stock> stockList) {
+	public Company(String name, Symbol symbol, LinkedList<Stock> stockList) {
 		this.name = name;
+		this.symbol = symbol;
 		this.stockList = stockList;
 	}
 	
 	public String getName() {
 		return name;
+	}
+	
+	public Symbol getSymbol() {
+		return symbol;
 	}
 	
 	public LinkedList<Stock> getStockList() {
@@ -33,6 +39,11 @@ public class Company implements Comparable<Company>, Serializable {
 	
 	@Override
 	public int compareTo(Company c) {
-		return name.compareTo(c.name);
+		return symbol.compareTo(c.symbol);
+	}
+
+	@Override
+	public String toString() {
+		return "Company [name=" + name + ", symbol=" + symbol + ", stockListSize=" + stockList.size() + "]";
 	}
 }

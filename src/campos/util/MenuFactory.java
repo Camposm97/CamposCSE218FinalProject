@@ -1,15 +1,37 @@
 package campos.util;
 
-import campos.event.ViewerHandler;
-import campos.scene.control.MenuEnum;
-import javafx.application.Platform;
+import java.util.LinkedList;
+
+import campos.model.Company;
+import camposfx.event.ExitHandler;
+import camposfx.event.OperationHandler;
+import camposfx.event.ViewerHandler;
+import camposfx.scene.control.MenuEnum;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
 
 public class MenuFactory {
-	public static Menu loadMenu(MenuEnum menuEnum) {
+	private LinkedList<Company> companyBag;
+	
+	public MenuFactory(LinkedList<Company> companyBag) {
+		this.companyBag = companyBag;
+	}
+	
+	public ObservableList<Menu> loadMenus() {
+		ObservableList<Menu> list = FXCollections.observableArrayList();
+		list.add(loadMenu(MenuEnum.File));
+		list.add(loadMenu(MenuEnum.View));
+		list.add(loadMenu(MenuEnum.Operation));
+		list.add(loadMenu(MenuEnum.Help));
+		return list;
+	}
+	
+	public Menu loadMenu(MenuEnum menuEnum) {
 		Menu menu = new Menu(menuEnum.toString());
 		switch (menu.getText().toUpperCase()) {
 		case "FILE":
@@ -27,43 +49,38 @@ public class MenuFactory {
 		return menu;
 	}
 
-	private static void impFileItems(Menu menu) {
+	private void impFileItems(Menu menu) {
 		MenuItem miExit = new MenuItem("Exit");
-		miExit.setOnAction(e -> {
-			boolean flag = AlertFactory.emitAlertExit();
-			if (flag) {
-				Platform.exit();
-			}
-		});
+		miExit.setOnAction(new ExitHandler<ActionEvent>(companyBag));
 		menu.getItems().addAll(miExit);
 	}
 	
-	private static void impViewItems(Menu menu) {
+	private void impViewItems(Menu menu) {
 		ToggleGroup t1 = new ToggleGroup();
+		
 		RadioMenuItem miAmzn = new RadioMenuItem("Amazon");
-		miAmzn.setOnAction(new ViewerHandler(miAmzn));
+		miAmzn.setOnAction(new ViewerHandler(miAmzn, companyBag));
 		miAmzn.setToggleGroup(t1);
+		
 		RadioMenuItem miAppl = new RadioMenuItem("Apple");
 		miAppl.setToggleGroup(t1);
-		miAppl.setOnAction(new ViewerHandler(miAppl));
+		miAppl.setOnAction(new ViewerHandler(miAppl, companyBag));
 		menu.getItems().addAll(miAmzn, miAppl);
 	}
 
-	private static void impOpItems(Menu menu) {
+	private void impOpItems(Menu menu) {
 		MenuItem miInsert = new MenuItem("Insert");
+		miInsert.setOnAction(new OperationHandler(miInsert.getText()));
 		MenuItem miSearch = new MenuItem("Search");
+		miSearch.setOnAction(new OperationHandler(miSearch.getText()));
 		menu.getItems().addAll(miInsert, miSearch);
 	}
 
-	private static void impHelpItems(Menu menu) {
+	private void impHelpItems(Menu menu) {
 		MenuItem miDev = new MenuItem("Developer's Github");
-		miDev.setOnAction(e -> {
-			// TODO CODE
-		});
+		miDev.setOnAction(e -> { Web.openMyGithub(); });
 		MenuItem miAbout = new MenuItem("About");
-		miAbout.setOnAction(e -> {
-			// TODO CODE
-		});
+		miAbout.setOnAction(e -> { AlertFactory.emitAbout(); });
 		menu.getItems().addAll(miDev, miAbout);
 	}
 }

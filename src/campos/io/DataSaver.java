@@ -4,8 +4,24 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.LinkedList;
 
-public class DataSaver {
+import campos.model.Company;
+
+public class DataSaver implements SrcConstants {
+	/**
+	 * Resets the Company Data back to .csv files
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		LinkedList<Company> companyList = DataLoader.loadParsedCompanyData();
+		saveCompanyBag(companyList); 
+	}
+	
+	public static void saveCompanyBag(LinkedList<Company> bag) {
+		writeObject(bag, COMP_BAG_SRC);
+	}
+	
 	/**
 	 * Parameter trgt should only have the file name.  The file is automatically 
 	 * stored in systemData
