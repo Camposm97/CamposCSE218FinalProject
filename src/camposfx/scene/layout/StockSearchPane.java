@@ -19,9 +19,6 @@ import javafx.scene.text.Font;
 
 public class StockSearchPane extends TabPane {
 	private Company c;
-	private DatePicker datePicker;
-	private TextField tfOpenValue, tfHighValue, tfLowValue, tfCloseValue, tfVolume;
-	private Button btSearch;
 
 	public StockSearchPane() {
 		initControls();
@@ -32,39 +29,8 @@ public class StockSearchPane extends TabPane {
 		return c;
 	}
 
-	public DatePicker getDatePicker() {
-		return datePicker;
-	}
-
-	public TextField getTfOpenValue() {
-		return tfOpenValue;
-	}
-
-	public TextField getTfHighValue() {
-		return tfHighValue;
-	}
-
-	public TextField getTfLowValue() {
-		return tfLowValue;
-	}
-
-	public TextField getTfCloseValue() {
-		return tfCloseValue;
-	}
-
-	public TextField getTfVolume() {
-		return tfVolume;
-	}
-
 	private void initControls() {
 		c = ChosenOnes.company;
-		datePicker = FXUtil.loadSearchDatePicker();
-		tfOpenValue = new NonEditTextField();
-		tfHighValue = new NonEditTextField();
-		tfLowValue = new NonEditTextField();
-		tfCloseValue = new NonEditTextField();
-		tfVolume = new NonEditTextField();
-		btSearch = new ButtonSearch(this);
 	}
 
 	private void displayControls() {

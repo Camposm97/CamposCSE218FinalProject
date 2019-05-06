@@ -1,14 +1,14 @@
 package camposfx.scene.control;
 
-import camposfx.scene.layout.StockSearchPane;
+import camposfx.scene.layout.OneStockTab;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
 public class ButtonSearch extends Button {
-	private StockSearchPane pane;
+	private OneStockTab pane;
 	
-	public ButtonSearch(StockSearchPane pane) {
+	public ButtonSearch(OneStockTab pane) {
 		super("Search");
 		this.pane = pane;
 		super.setOnAction(new SearchHandler());
