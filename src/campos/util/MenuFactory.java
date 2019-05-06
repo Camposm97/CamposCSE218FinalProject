@@ -51,7 +51,17 @@ public class MenuFactory {
 
 	private void impFileItems(Menu menu) {
 		MenuItem miExit = new MenuItem("Exit");
+<<<<<<< HEAD
 		miExit.setOnAction(new ExitHandler<ActionEvent>(companyBag));
+=======
+		miExit.setGraphic(ImgUtil.loadImgV(ImgUtil.ICON_EXIT));
+		miExit.setOnAction(e -> {
+			boolean flag = AlertFactory.emitAlertExit();
+			if (flag) {
+				Platform.exit();
+			}
+		});
+>>>>>>> 8eb7ba20d635452188792655186fedc52b7e4d17
 		menu.getItems().addAll(miExit);
 	}
 	
@@ -70,17 +80,35 @@ public class MenuFactory {
 
 	private void impOpItems(Menu menu) {
 		MenuItem miInsert = new MenuItem("Insert");
+<<<<<<< HEAD
 		miInsert.setOnAction(new OperationHandler(miInsert.getText()));
 		MenuItem miSearch = new MenuItem("Search");
 		miSearch.setOnAction(new OperationHandler(miSearch.getText()));
+=======
+		miInsert.setGraphic(ImgUtil.loadImgV(ImgUtil.ICON_INSERT));
+		MenuItem miSearch = new MenuItem("Search");
+		miSearch.setGraphic(ImgUtil.loadImgV(ImgUtil.ICON_SEARCH));
+>>>>>>> 8eb7ba20d635452188792655186fedc52b7e4d17
 		menu.getItems().addAll(miInsert, miSearch);
 	}
 
 	private void impHelpItems(Menu menu) {
 		MenuItem miDev = new MenuItem("Developer's Github");
+<<<<<<< HEAD
 		miDev.setOnAction(e -> { Web.openMyGithub(); });
 		MenuItem miAbout = new MenuItem("About");
 		miAbout.setOnAction(e -> { AlertFactory.emitAbout(); });
+=======
+		miDev.setGraphic(ImgUtil.loadImgV(ImgUtil.ICON_DEV));
+		miDev.setOnAction(e -> {
+			// TODO CODE
+		});
+		MenuItem miAbout = new MenuItem("About");
+		miAbout.setGraphic(ImgUtil.loadImgV(ImgUtil.ICON_ABOUT));
+		miAbout.setOnAction(e -> {
+			// TODO CODE
+		});
+>>>>>>> 8eb7ba20d635452188792655186fedc52b7e4d17
 		menu.getItems().addAll(miDev, miAbout);
 	}
 }
