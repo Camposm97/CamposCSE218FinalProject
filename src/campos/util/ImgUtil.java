@@ -17,6 +17,8 @@ public class ImgUtil {
 	public static final String ICON_INSERT = "resources/images/icons/insert.png";
 	public static final String ICON_SEARCH = "resources/images/icons/search.png";
 	public static final String BACKGROUND_MAIN = "resources/images/backgrounds/background.png";
+	public static final String ICON_AMZN = "resources/images/icons/amazon.png";
+	public static final String ICON_AAPL = "resources/images/icons/apple.png";
 	
 	public static void loadStageIcon(Stage stage) {
 		stage.getIcons().add(loadImg(ICON_MAIN));

@@ -16,8 +16,10 @@ public class AlertFactory {
 		alert.setContentText(content);
 		alert.showAndWait();
 	}
+	
 	public static boolean emitExit() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setGraphic(ImgUtil.loadImgV(ImgUtil.ICON_EXIT_BIG));
 		alert.setTitle(MyStage.TITLE);
 		alert.setHeaderText("Are you sure you want to exit?");
 		alert.setContentText("Note: Any modifications you made to a company will be saved.");

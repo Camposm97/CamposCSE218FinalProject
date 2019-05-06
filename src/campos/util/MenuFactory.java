@@ -52,6 +52,7 @@ public class MenuFactory {
 	private void impFileItems(Menu menu) {
 		MenuItem miExit = new MenuItem("Exit");
 		miExit.setOnAction(new ExitHandler<ActionEvent>(companyBag));
+		miExit.setGraphic(ImgUtil.loadImgV(ImgUtil.ICON_EXIT));
 		menu.getItems().addAll(miExit);
 	}
 	
@@ -60,12 +61,14 @@ public class MenuFactory {
 		
 		RadioMenuItem miAmzn = new RadioMenuItem("Amazon");
 		miAmzn.setOnAction(new ViewerHandler(miAmzn, companyBag));
+		miAmzn.setGraphic(ImgUtil.loadImgV(ImgUtil.ICON_AMZN));
 		miAmzn.setToggleGroup(t1);
 		
 		RadioMenuItem miAppl = new RadioMenuItem("Apple");
-		miAppl.setToggleGroup(t1);
 		miAppl.setOnAction(new ViewerHandler(miAppl, companyBag));
+		miAppl.setGraphic(ImgUtil.loadImgV(ImgUtil.ICON_AAPL));
 		menu.getItems().addAll(miAmzn, miAppl);
+		miAppl.setToggleGroup(t1);
 	}
 
 	private void impOpItems(Menu menu) {
@@ -82,8 +85,10 @@ public class MenuFactory {
 	private void impHelpItems(Menu menu) {
 		MenuItem miDev = new MenuItem("Developer's Github");
 		miDev.setOnAction(e -> { Web.openMyGithub(); });
+		miDev.setGraphic(ImgUtil.loadImgV(ImgUtil.ICON_DEV));
 		MenuItem miAbout = new MenuItem("About");
 		miAbout.setOnAction(e -> { AlertFactory.emitAbout(); });
+		miAbout.setGraphic(ImgUtil.loadImgV(ImgUtil.ICON_ABOUT));
 		menu.getItems().addAll(miDev, miAbout);
 	}
 }
