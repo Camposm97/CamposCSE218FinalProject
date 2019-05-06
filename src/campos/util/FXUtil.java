@@ -48,7 +48,7 @@ public class FXUtil {
 		return hBox;
 	}
 	
-	public static DatePicker loadDatePicker() {
+	public static DatePicker loadInsertDatePicker() {
 		DatePicker datePicker = new DatePicker(LocalDate.now());
 		datePicker.setEditable(false);
 		datePicker.setDayCellFactory(e -> new DateCell() {
@@ -58,6 +58,12 @@ public class FXUtil {
 	            setDisable(empty || date.compareTo(today) < 0 );
 	        }
 		});
+		return datePicker;
+	}
+	
+	public static DatePicker loadSearchDatePicker() {
+		DatePicker datePicker = new DatePicker(LocalDate.now());
+		datePicker.setEditable(false);
 		return datePicker;
 	}
 	

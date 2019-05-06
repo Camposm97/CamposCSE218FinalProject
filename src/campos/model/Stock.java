@@ -49,4 +49,10 @@ public class Stock implements Comparable<Stock>, Serializable {
 	public int compareTo(Stock s) {
 		return date.compareTo(s.date);
 	}
+
+	@Override
+	public String toString() {
+		return "Stock [date=" + date + ", openValue=" + openValue + ", highValue=" + highValue + ", lowValue="
+				+ lowValue + ", closeValue=" + closeValue + ", volume=" + volume + "]";
+	}
 }

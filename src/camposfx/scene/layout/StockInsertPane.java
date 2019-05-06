@@ -10,11 +10,12 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-public class StockInsertPane extends OperationPane {
+public class StockInsertPane extends BorderPane {
 	private Company c;
 	private DatePicker datePicker;
 	private DoubleTextField tfOpenValue, tfHighValue, tfLowValue, tfCloseValue, tfVolume;
@@ -52,10 +53,18 @@ public class StockInsertPane extends OperationPane {
 	public DoubleTextField getTfVolume() {
 		return tfVolume;
 	}
+	
+	public void clearAll() {
+		tfOpenValue.clear();
+		tfHighValue.clear();
+		tfLowValue.clear();
+		tfCloseValue.clear();
+		tfVolume.clear();
+	}
 
 	private void initControls() {
 		c = ChosenOnes.company;
-		datePicker = FXUtil.loadDatePicker();
+		datePicker = FXUtil.loadInsertDatePicker();
 		tfOpenValue = new DoubleTextField();
 		tfHighValue = new DoubleTextField();
 		tfLowValue = new DoubleTextField();

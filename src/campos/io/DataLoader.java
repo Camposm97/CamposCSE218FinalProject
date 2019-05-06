@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.time.LocalDate;
 import java.util.LinkedList;
+import java.util.TreeSet;
 
 import campos.model.Company;
 import campos.model.Stock;
@@ -13,7 +14,13 @@ import campos.model.Symbol;
 
 public class DataLoader implements SrcConstants {
 	private static final String DELIMITER = ",";
-
+	
+	public static void main(String[] args) {
+		TreeSet<Stock> treeSet = readAlphaVantageFileAsMap(DAILY_AMZN);
+		for (Stock s : treeSet) {
+			System.out.println(s);
+		}
+	}
 	/**
 	 * Returns a LinkedList containing data from companyBag.dat
 	 * @return LinkedList<Company>
@@ -53,6 +60,19 @@ public class DataLoader implements SrcConstants {
 			e.printStackTrace();
 		}
 		return o;
+	}
+	
+	public static TreeSet<Stock> readAlphaVantageFileAsMap(String src) {
+		TreeSet<Stock> stockTree = new TreeSet<>();
+		FileBuilt fileBuilt = new FileBuilt(src);
+		LinkedList<String> contentList = fileBuilt.getContentList();
+		for (int i = 1; i < contentList.size(); i++) {
+			String currentLine = contentList.get(i);
+			String[] tokens = currentLine.split(DELIMITER);
+			Stock stock = readTokens(tokens);
+			stockTree.add(stock);
+		}
+		return stockTree;
 	}
 	
 	/**
