@@ -1,15 +1,19 @@
 package campos.util;
 
 import java.time.LocalDate;
-import java.util.LinkedList;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeMap;
 
 import campos.model.Company;
 import campos.model.Stock;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.ValueAxis;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.DateCell;
@@ -75,24 +79,27 @@ public class FXUtil {
 		return pane;
 	}
 	
-	public static LineChart<Number, Number> loadStockChart(Company c) {
-		final NumberAxis xAxis = new NumberAxis();
-		xAxis.setLabel("Day");
-		final NumberAxis yAxis = new NumberAxis();
+	public static LineChart<LocalDate, Number> loadStockChart(Company c) {
+		CategoryAxis xAxis = new CategoryAxis();
+		xAxis.setLabel("Date");
+		NumberAxis yAxis = new NumberAxis();
 		yAxis.setLabel("Stock Price");
 		
-		Series<Number, Number> series = new Series<>();
-		LinkedList<Stock> stockList = c.getStockList();
+		Series<String, Number> series = new Series<>();
+		TreeMap<LocalDate, Stock> stockMap = c.getStockMap();
+		Set<LocalDate> dateSet = stockMap.keySet();
+		Iterator<LocalDate> iter = dateSet.iterator();
 		
-		for (int i = 0; i < stockList.size(); i++) {
-			Stock s = stockList.get(i);
-			Data<Number, Number> data = new Data<>(i, s.getOpenValue());
+		for (int i = 0; i < stockMap.size(); i++) {
+			LocalDate localDate = iter.next();
+			Stock s = stockMap.get(localDate);
+			Data<String, Number> data = new Data<>(localDate.toString(), s.getOpenValue());
 			series.getData().add(data);
 		}
 		
 		series.setName(c.getName());
 		
-		LineChart<Number, Number> lineChart = new LineChart<>(xAxis, yAxis);
+		LineChart lineChart = new LineChart(xAxis, yAxis);
 		lineChart.getData().add(series);
 		return lineChart;
 	}

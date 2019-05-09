@@ -7,7 +7,7 @@ import javafx.scene.layout.BorderPane;
 
 public class StockViewerPane extends BorderPane {
 //	private Company c;
-	private LineChart<Number, Number> lineChart;
+	private LineChart lineChart;
 	
 	public StockViewerPane(Company c) {
 //		this.c = c;

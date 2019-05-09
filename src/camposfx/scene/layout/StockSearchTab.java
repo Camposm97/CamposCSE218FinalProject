@@ -10,8 +10,9 @@ public class StockSearchTab extends Tab {
 	protected Company c;
 	protected TextField tfOpenValue, tfHighValue, tfLowValue, tfCloseValue, tfVolume;
 
-	public StockSearchTab(String string) {
+	public StockSearchTab(String string, Company c) {
 		super(string);
+		this.c = c;
 		initControls();
 	}
 
@@ -22,6 +23,10 @@ public class StockSearchTab extends Tab {
 		tfLowValue = new NonEditTextField();
 		tfCloseValue = new NonEditTextField();
 		tfVolume = new NonEditTextField();
+	}
+	
+	public Company getC() {
+		return c;
 	}
 
 	public TextField getTfOpenValue() {

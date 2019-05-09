@@ -1,20 +1,30 @@
 package camposfx.scene.layout;
 
+import java.time.LocalDate;
+
+import campos.model.Company;
 import campos.util.FXUtil;
 import camposfx.scene.control.ButtonSearch;
 import camposfx.scene.control.MyLabel;
 import javafx.geometry.Pos;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 
-public class OneStockTab extends StockSearchTab {
+public class OneStockSearchTab extends StockSearchTab {
 	private ButtonSearch btSearch;
+	private DatePicker datePicker;
 	
-	public OneStockTab() {
-		super("One Stock");
+	public OneStockSearchTab(Company c) {
+		super("One Stock", c);
 		this.btSearch = new ButtonSearch(this);
+		this.datePicker = new DatePicker(LocalDate.now());
 		displayControls();
+	}
+	
+	public DatePicker getDatePicker() {
+		return datePicker;
 	}
 	
 	private void displayControls() {
@@ -31,6 +41,7 @@ public class OneStockTab extends StockSearchTab {
 		gridPane.addRow(4, new Label("Low Value:"), tfLowValue);
 		gridPane.addRow(5, new Label("Close Value:"), tfCloseValue);
 		gridPane.addRow(6, new Label("Volume:"), tfVolume);
+		gridPane.addRow(7, FXUtil.asHBox(btSearch));
 		setContent(gridPane);
 	}
 }

@@ -5,8 +5,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.TreeSet;
+import java.util.Set;
+import java.util.TreeMap;
 
 import campos.model.Company;
 import campos.model.Stock;
@@ -16,10 +18,10 @@ public class DataLoader implements SrcConstants {
 	private static final String DELIMITER = ",";
 	
 	public static void main(String[] args) {
-		TreeSet<Stock> treeSet = readAlphaVantageFileAsMap(DAILY_AMZN);
-		for (Stock s : treeSet) {
-			System.out.println(s);
-		}
+		TreeMap<LocalDate, Stock> treeMap = readAlphaVantageFileAsTreeMap(DAILY_AMZN);
+		Set<LocalDate> dateSet = treeMap.keySet();
+		Iterator<LocalDate> iter = dateSet.iterator();
+		System.out.println(treeMap.get(iter.next()));
 	}
 	/**
 	 * Returns a LinkedList containing data from companyBag.dat
@@ -37,8 +39,8 @@ public class DataLoader implements SrcConstants {
 	 * @return LinkedList<Company>
 	 */
 	public static LinkedList<Company> loadParsedCompanyData() {
-		Company compApple = new Company("Apple", Symbol.AAPL, readAlphaVantageFile(DAILY_AAPL));
-		Company compAmzn = new Company("Amazon", Symbol.AMZN, readAlphaVantageFile(DAILY_AMZN));
+		Company compApple = new Company("Apple", Symbol.AAPL, readAlphaVantageFileAsTreeMap(DAILY_AAPL));
+		Company compAmzn = new Company("Amazon", Symbol.AMZN, readAlphaVantageFileAsTreeMap(DAILY_AMZN));
 		LinkedList<Company> companyList = new LinkedList<>();
 		companyList.add(compApple);
 		companyList.add(compAmzn);
@@ -62,17 +64,17 @@ public class DataLoader implements SrcConstants {
 		return o;
 	}
 	
-	public static TreeSet<Stock> readAlphaVantageFileAsMap(String src) {
-		TreeSet<Stock> stockTree = new TreeSet<>();
-		FileBuilt fileBuilt = new FileBuilt(src);
-		LinkedList<String> contentList = fileBuilt.getContentList();
+	public static TreeMap<LocalDate, Stock> readAlphaVantageFileAsTreeMap(String src) {
+		TreeMap<LocalDate, Stock> treeMap = new TreeMap<>();
+		FileBuilt fb = new FileBuilt(src);
+		LinkedList<String> contentList = fb.getContentList();
 		for (int i = 1; i < contentList.size(); i++) {
 			String currentLine = contentList.get(i);
 			String[] tokens = currentLine.split(DELIMITER);
-			Stock stock = readTokens(tokens);
-			stockTree.add(stock);
+			Stock stock = parseTokens(tokens);
+			treeMap.put(stock.getDate(), stock);
 		}
-		return stockTree;
+		return treeMap;
 	}
 	
 	/**
@@ -89,14 +91,14 @@ public class DataLoader implements SrcConstants {
 		for (int i = 1; i < contentList.size(); i++) {
 			String currentLine = contentList.get(i);
 			String[] tokens = currentLine.split(DELIMITER);
-			Stock stock = readTokens(tokens);
+			Stock stock = parseTokens(tokens);
 			stockList.add(stock);
 		}
 		System.out.println("Successfully read from " + file);
 		return stockList;
 	}
 	
-	private static Stock readTokens(String[] tokens) {
+	private static Stock parseTokens(String[] tokens) {
 		String[] dateTokens = tokens[0].split("-");
 		int year = Integer.parseInt(dateTokens[0]);
 		int month = Integer.parseInt(dateTokens[1]);

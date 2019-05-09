@@ -1,23 +1,24 @@
 package campos.model;
 
 import java.io.Serializable;
-import java.util.LinkedList;
+import java.time.LocalDate;
+import java.util.TreeMap;
 
 @SuppressWarnings("serial")
 public class Company implements Comparable<Company>, Serializable {
 	private String name;
 	private Symbol symbol;
-	private LinkedList<Stock> stockList;
+	private TreeMap<LocalDate, Stock> stockMap;
 	
 	public Company(String name) {
 		this.name = name;
-		this.stockList = new LinkedList<>();
+		this.stockMap = new TreeMap<>();
 	}
 	
-	public Company(String name, Symbol symbol, LinkedList<Stock> stockList) {
+	public Company(String name, Symbol symbol, TreeMap<LocalDate, Stock> stockMap) {
 		this.name = name;
 		this.symbol = symbol;
-		this.stockList = stockList;
+		this.stockMap = stockMap;
 	}
 	
 	public String getName() {
@@ -28,13 +29,8 @@ public class Company implements Comparable<Company>, Serializable {
 		return symbol;
 	}
 	
-	public LinkedList<Stock> getStockList() {
-		return stockList;
-	}
-	
-	public void displayStocks() {
-		for (Stock s : stockList)
-			System.out.println(name + ": " + s);
+	public TreeMap<LocalDate, Stock> getStockMap() {
+		return stockMap;
 	}
 	
 	@Override
@@ -44,6 +40,6 @@ public class Company implements Comparable<Company>, Serializable {
 
 	@Override
 	public String toString() {
-		return "Company [name=" + name + ", symbol=" + symbol + ", stockListSize=" + stockList.size() + "]";
+		return "Company [name=" + name + ", symbol=" + symbol + ", stockListSize=" + stockMap.size() + "]";
 	}
 }
