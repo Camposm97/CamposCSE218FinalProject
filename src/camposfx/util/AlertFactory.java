@@ -5,7 +5,7 @@ import java.util.Optional;
 import campos.model.Company;
 import campos.model.Stock;
 import campos.model.Symbol;
-import camposfx.stage.MyLabel;
+import camposfx.stage.MyStage;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -40,7 +40,7 @@ public class AlertFactory {
 	public static boolean emitExit() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setGraphic(ImgUtil.loadImgV(ImgUtil.ICON_EXIT_BIG));
-		alert.setTitle(MyLabel.TITLE);
+		alert.setTitle(MyStage.TITLE);
 		alert.setHeaderText("Are you sure you want to exit?");
 		alert.setContentText("Note: Any modifications you made to a company will be saved.");
 		
@@ -58,7 +58,7 @@ public class AlertFactory {
 	public static void emitAbout() {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("About");
-		alert.setHeaderText(MyLabel.TITLE);
+		alert.setHeaderText(MyStage.TITLE);
 		alert.showAndWait();
 	}
 

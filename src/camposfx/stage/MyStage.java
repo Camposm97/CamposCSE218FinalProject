@@ -11,12 +11,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-public class MyLabel extends Stage {
+public class MyStage extends Stage {
 	public static final String TITLE = "Historical Stock Data Analysis";
 	private LinkedList<Company> companyBag;
 	private MyBorderPane root;
 
-	public MyLabel() {
+	public MyStage() {
 		this.companyBag = DataLoader.loadCompanyBag();
 		this.root = new MyBorderPane(companyBag);
 		ImgUtil.loadStageIcon(this);
