@@ -5,15 +5,15 @@ import java.time.LocalDate;
 
 @SuppressWarnings("serial")
 public class Stock implements Comparable<Stock>, Serializable {
-	private LocalDate date;
+	private LocalDate localDate;
 	private double openValue;
 	private double highValue;
 	private double lowValue;
 	private double closeValue;
 	private int volume;
 	
-	public Stock(LocalDate date, double openValue, double highValue, double lowValue, double closeValue, int volume) {
-		this.date = date;
+	public Stock(LocalDate localDate, double openValue, double highValue, double lowValue, double closeValue, int volume) {
+		this.localDate = localDate;
 		this.openValue = openValue;
 		this.highValue = highValue;
 		this.lowValue = lowValue;
@@ -21,8 +21,8 @@ public class Stock implements Comparable<Stock>, Serializable {
 		this.volume = volume;
 	}
 
-	public LocalDate getDate() {
-		return date;
+	public LocalDate getLocalDate() {
+		return localDate;
 	}
 
 	public double getOpenValue() {
@@ -47,12 +47,12 @@ public class Stock implements Comparable<Stock>, Serializable {
 
 	@Override
 	public int compareTo(Stock s) {
-		return date.compareTo(s.date);
+		return localDate.compareTo(s.localDate);
 	}
 
 	@Override
 	public String toString() {
-		return "Stock [date=" + date + ", openValue=" + openValue + ", highValue=" + highValue + ", lowValue="
+		return "Stock [date=" + localDate + ", openValue=" + openValue + ", highValue=" + highValue + ", lowValue="
 				+ lowValue + ", closeValue=" + closeValue + ", volume=" + volume + "]";
 	}
 }

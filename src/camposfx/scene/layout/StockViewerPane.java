@@ -1,13 +1,16 @@
 package camposfx.scene.layout;
 
+import java.time.LocalDate;
+
 import campos.model.Company;
-import campos.util.FXUtil;
+import camposfx.util.FXUtil;
 import javafx.scene.chart.LineChart;
 import javafx.scene.layout.BorderPane;
 
+@Deprecated
 public class StockViewerPane extends BorderPane {
 //	private Company c;
-	private LineChart lineChart;
+	private LineChart<LocalDate, Number> lineChart;
 	
 	public StockViewerPane(Company c) {
 //		this.c = c;

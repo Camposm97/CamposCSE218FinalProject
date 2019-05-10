@@ -14,7 +14,7 @@ import campos.model.Company;
 import campos.model.Stock;
 import campos.model.Symbol;
 
-public class DataLoader implements SrcConstants {
+public class DataLoader implements Sources {
 	private static final String DELIMITER = ",";
 	
 	public static void main(String[] args) {
@@ -29,7 +29,7 @@ public class DataLoader implements SrcConstants {
 	 */
 	@SuppressWarnings("unchecked")
 	public static LinkedList<Company> loadCompanyBag() {
-		LinkedList<Company> list = (LinkedList<Company>) readObject(COMP_BAG_SRC);
+		LinkedList<Company> list = (LinkedList<Company>) readObject(COMPANY_BAG);
 		System.out.println("Found " + list.size() + " Companies");
 		return list;
 	}
@@ -72,7 +72,7 @@ public class DataLoader implements SrcConstants {
 			String currentLine = contentList.get(i);
 			String[] tokens = currentLine.split(DELIMITER);
 			Stock stock = parseTokens(tokens);
-			treeMap.put(stock.getDate(), stock);
+			treeMap.put(stock.getLocalDate(), stock);
 		}
 		return treeMap;
 	}

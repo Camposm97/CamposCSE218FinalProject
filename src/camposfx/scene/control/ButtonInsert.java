@@ -3,8 +3,8 @@ package camposfx.scene.control;
 import java.time.LocalDate;
 
 import campos.model.Stock;
-import campos.util.AlertFactory;
 import camposfx.scene.layout.StockInsertPane;
+import camposfx.util.AlertFactory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -30,8 +30,8 @@ public class ButtonInsert extends Button {
 				double closeValue = pane.getTfCloseValue().getValue();
 				int volume = (int) pane.getTfVolume().getValue();
 				Stock stock = new Stock(date, openValue, highValue, lowValue, closeValue, volume);
-				pane.getC().getStockMap().put(stock.getDate(), stock);
-				AlertFactory.emitAlert("Insert", "Successfully added stock on " + date, "Close this window to continue.");
+				pane.getC().getStockMap().put(stock.getLocalDate(), stock);
+				AlertFactory.emitInfo("Insert", "Successfully added stock on " + date, "Close this window to continue.");
 			} catch (NumberFormatException e) {
 				AlertFactory.emitError("The TextFields can only contain numbers.");
 			}

@@ -2,9 +2,9 @@ package camposfx.event;
 
 import campos.model.ChosenOnes;
 import campos.model.Company;
-import campos.util.AlertFactory;
 import camposfx.scene.layout.StockInsertPane;
-import camposfx.scene.layout.StockSearchPane;
+import camposfx.scene.layout.StockSearchTabPane;
+import camposfx.util.AlertFactory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
@@ -39,7 +39,7 @@ public class OperationHandler implements EventHandler<ActionEvent> {
 	public void toSearchPane() {
 		Company c = ChosenOnes.company;
 		if (c != null) {
-			ChosenOnes.root.setCenter(new StockSearchPane());
+			ChosenOnes.root.setCenter(new StockSearchTabPane(c));
 		} else {
 			AlertFactory.emitError("Solution: Please select a company to before searching for stock data.");
 		}

@@ -1,12 +1,12 @@
-package campos.util;
+package camposfx.util;
 
 import java.util.LinkedList;
 
 import campos.model.Company;
+import campos.model.MenuEnum;
 import camposfx.event.ExitHandler;
 import camposfx.event.OperationHandler;
-import camposfx.event.ViewerHandler;
-import camposfx.scene.control.MenuEnum;
+import camposfx.event.CompanyChooserHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -60,12 +60,12 @@ public class MenuFactory {
 		ToggleGroup t1 = new ToggleGroup();
 		
 		RadioMenuItem miAmzn = new RadioMenuItem("Amazon");
-		miAmzn.setOnAction(new ViewerHandler(miAmzn, companyBag));
+		miAmzn.setOnAction(new CompanyChooserHandler(miAmzn, companyBag));
 		miAmzn.setGraphic(ImgUtil.loadImgV(ImgUtil.ICON_AMZN));
 		miAmzn.setToggleGroup(t1);
 		
 		RadioMenuItem miAppl = new RadioMenuItem("Apple");
-		miAppl.setOnAction(new ViewerHandler(miAppl, companyBag));
+		miAppl.setOnAction(new CompanyChooserHandler(miAppl, companyBag));
 		miAppl.setGraphic(ImgUtil.loadImgV(ImgUtil.ICON_AAPL));
 		menu.getItems().addAll(miAmzn, miAppl);
 		miAppl.setToggleGroup(t1);

@@ -6,16 +6,16 @@ import java.util.LinkedList;
 import campos.model.Company;
 import campos.model.ChosenOnes;
 import campos.model.Symbol;
-import campos.util.FXUtil;
+import camposfx.util.FXUtil;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.RadioMenuItem;
 
-public class ViewerHandler implements EventHandler<ActionEvent> {
+public class CompanyChooserHandler implements EventHandler<ActionEvent> {
 	private String name;
 	private LinkedList<Company> companyBag;
 	
-	public ViewerHandler(RadioMenuItem menuItem, LinkedList<Company> companyBag) {
+	public CompanyChooserHandler(RadioMenuItem menuItem, LinkedList<Company> companyBag) {
 		this.name = menuItem.getText().toUpperCase();
 		this.companyBag = companyBag;
 	}

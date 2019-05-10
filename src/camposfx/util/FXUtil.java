@@ -1,4 +1,4 @@
-package campos.util;
+package camposfx.util;
 
 import java.time.LocalDate;
 import java.util.Iterator;

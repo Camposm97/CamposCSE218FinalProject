@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 import campos.io.DataSaver;
 import campos.model.Company;
-import campos.util.AlertFactory;
+import camposfx.util.AlertFactory;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;

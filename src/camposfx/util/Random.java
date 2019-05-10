@@ -1,4 +1,4 @@
-package campos.util;
+package camposfx.util;
 
 public class Random {
 	private static final String[] errArr = { "Uh oh.  Something went wrong...", "I didn't do it! I swear!",

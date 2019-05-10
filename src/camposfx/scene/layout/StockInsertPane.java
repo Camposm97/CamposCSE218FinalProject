@@ -2,9 +2,9 @@ package camposfx.scene.layout;
 
 import campos.model.ChosenOnes;
 import campos.model.Company;
-import campos.util.FXUtil;
 import camposfx.scene.control.ButtonInsert;
 import camposfx.scene.control.DoubleTextField;
+import camposfx.util.FXUtil;
 import camposfx.scene.control.MyLabel;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

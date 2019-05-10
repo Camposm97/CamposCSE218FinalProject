@@ -8,9 +8,9 @@ import java.util.LinkedList;
 
 import campos.model.Company;
 
-public class DataSaver implements SrcConstants {
+public class DataSaver implements Sources {
 	/**
-	 * Resets the Company Data back to .csv files
+	 * Run this to reset the Company Data back to .csv files
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -19,7 +19,7 @@ public class DataSaver implements SrcConstants {
 	}
 	
 	public static void saveCompanyBag(LinkedList<Company> bag) {
-		writeObject(bag, COMP_BAG_SRC);
+		writeObject(bag, COMPANY_BAG);
 	}
 	
 	/**

@@ -1,4 +1,4 @@
-package campos.util;
+package camposfx.util;
 
 import java.awt.Desktop;
 import java.net.URI;

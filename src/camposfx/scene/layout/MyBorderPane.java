@@ -4,8 +4,8 @@ import java.util.LinkedList;
 
 import campos.model.ChosenOnes;
 import campos.model.Company;
-import campos.util.FXUtil;
 import camposfx.scene.control.MyMenuBar;
+import camposfx.util.FXUtil;
 import javafx.scene.layout.BorderPane;
 
 public class MyBorderPane extends BorderPane {	

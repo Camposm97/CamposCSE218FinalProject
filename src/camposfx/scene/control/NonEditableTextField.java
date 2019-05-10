@@ -2,8 +2,8 @@ package camposfx.scene.control;
 
 import javafx.scene.control.TextField;
 
-public class NonEditTextField extends TextField {
-	public NonEditTextField() {
+public class NonEditableTextField extends TextField {
+	public NonEditableTextField() {
 		super.setEditable(false);
 	}
 }
