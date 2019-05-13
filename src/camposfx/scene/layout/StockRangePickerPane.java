@@ -23,21 +23,21 @@ public class StockRangePickerPane extends BorderPane {
 	private StockDatePicker latestDatePicker;
 	private Company c;
 
-	public StockRangePickerPane(StockSearchPane pane1, StockSearchPane pane2) {
+	public StockRangePickerPane(StockSearchPane oldStockPane, StockSearchPane lateStockPane) {
 		this.lblAvg = new Label("Average:");
 		this.tfOpen = new AverageTextField("Open Value");
 		this.tfHigh = new AverageTextField("High Value");
 		this.tfLow = new AverageTextField("Low Value");
 		this.tfClose = new AverageTextField("Close Value");
 		this.tfVolume = new AverageTextField("Volume");
-		this.oldestDatePicker = pane1.getDatePicker();
-		this.latestDatePicker = pane2.getDatePicker();
+		this.oldestDatePicker = oldStockPane.getDatePicker();
+		this.latestDatePicker = lateStockPane.getDatePicker();
 		this.oldestDatePicker.addEventHandler(ActionEvent.ACTION, new StockRangePickerHandler());
 		this.latestDatePicker.addEventHandler(ActionEvent.ACTION, new StockRangePickerHandler());
-		this.c = pane1.getC();
-		this.setLeft(pane1);
+		this.c = oldStockPane.getC();
+		this.setLeft(oldStockPane);
 		this.setCenter(getCenterPane());
-		this.setRight(pane2);
+		this.setRight(lateStockPane);
 		this.setPadding(FXUtil.DEFAULT_INSETS);
 	}
 	

@@ -21,7 +21,7 @@ public class MyStage extends Stage {
 		this.root = new MyBorderPane(companyBag);
 		ImgUtil.loadStageIcon(this);
 		this.setTitle(TITLE);
-		this.setScene(new Scene(root));
+		this.setScene(new Scene(root, 1000, 800));
 		this.setOnCloseRequest(new ExitHandler<WindowEvent>(companyBag));
 	}
 }
