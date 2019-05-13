@@ -53,12 +53,14 @@ public class StockRangePickerPane extends BorderPane {
 	private class StockRangePickerHandler implements EventHandler<ActionEvent> {
 		private LocalDate oldDate;
 		private LocalDate lateDate;
+		private double avgOpen, avgHigh, avgLow, avgClose;
+		private int avgVolume;
 		
 		@Override
 		public void handle(ActionEvent e) {
 			oldDate = oldestDatePicker.getValue();
 			lateDate = latestDatePicker.getValue();
-			if (oldDate.compareTo(lateDate) < 0) {
+			if (oldDate.compareTo(lateDate) < 0) { // Is oldDate older than lateDate?
 				calcAveragePrices();
 			}
 		}
@@ -67,34 +69,25 @@ public class StockRangePickerPane extends BorderPane {
 			Map<LocalDate, Stock> subMap = c.getStockMap().subMap(oldDate, lateDate.plusDays(1));			
 			Set<LocalDate> dateSet = subMap.keySet();
 			
-			double avgOpenValue = 0;
-			double avgHighValue = 0;
-			double avgLowValue = 0;
-			double avgCloseValue = 0;
-			int avgVolume = 0;
+			avgOpen = 0; avgHigh = 0; avgLow = 0; avgClose = 0; avgVolume = 0;
 			
 			for (LocalDate localDate : dateSet) {
 				Stock stock = subMap.get(localDate);
-				avgOpenValue += stock.getOpenValue();
-				avgHighValue += stock.getHighValue();
-				avgLowValue += stock.getLowValue();
-				avgCloseValue += stock.getCloseValue();
+				avgOpen += stock.getOpenValue();
+				avgHigh += stock.getHighValue();
+				avgLow += stock.getLowValue();
+				avgClose += stock.getCloseValue();
 				avgVolume += stock.getVolume();
 				System.out.println(stock);
 			}
 			
-			avgOpenValue /= subMap.size();
-			avgHighValue /= subMap.size();
-			avgLowValue /= subMap.size();
-			avgCloseValue /= subMap.size();
+			avgOpen /= subMap.size();
+			avgHigh /= subMap.size();
+			avgLow /= subMap.size();
+			avgClose /= subMap.size();
 			avgVolume /= subMap.size();
-			
-			lblAvg.setText("Average: (" + oldDate + " - " + lateDate + ")");
-			tfOpen.setText(String.format("%-10.2f", avgOpenValue));
-			tfHigh.setText(String.format("%-10.2f", avgHighValue));
-			tfLow.setText(String.format("%-10.2f", avgLowValue));
-			tfClose.setText(String.format("%-10.2f", avgCloseValue));
-			tfVolume.setText(String.format("%-10d", avgVolume));
+
+			displayAvgValues();
 			
 //			System.out.println();
 //			System.out.println("Average Open Value: " + avgOpenValue);
@@ -103,6 +96,15 @@ public class StockRangePickerPane extends BorderPane {
 //			System.out.println("Average Close Value: " + avgCloseValue);
 //			System.out.println("Average Volume: " + avgVolume);
 //			System.out.println();
+		}
+		
+		public void displayAvgValues() {
+			lblAvg.setText("Average: (" + oldDate + " - " + lateDate + ")");
+			tfOpen.setText(String.format("%-10.2f", avgOpen));
+			tfHigh.setText(String.format("%-10.2f", avgHigh));
+			tfLow.setText(String.format("%-10.2f", avgLow));
+			tfClose.setText(String.format("%-10.2f", avgClose));
+			tfVolume.setText(String.format("%-10d", avgVolume));
 		}
 	}
 }
