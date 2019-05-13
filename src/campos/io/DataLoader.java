@@ -14,7 +14,7 @@ import campos.model.Company;
 import campos.model.Stock;
 import campos.model.Symbol;
 
-public class DataLoader implements Sources {
+public class DataLoader implements Constants {
 	private static final String DELIMITER = ",";
 	
 	public static void main(String[] args) {

@@ -8,7 +8,7 @@ import java.util.LinkedList;
 
 import campos.model.Company;
 
-public class DataSaver implements Sources {
+public class DataSaver implements Constants {
 	/**
 	 * Run this to reset the Company Data back to .csv files
 	 * @param args

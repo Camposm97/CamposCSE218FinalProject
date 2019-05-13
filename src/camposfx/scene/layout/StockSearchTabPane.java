@@ -1,7 +1,6 @@
 package camposfx.scene.layout;
 
 import campos.model.Company;
-import camposfx.scene.control.StockRangePickerPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
