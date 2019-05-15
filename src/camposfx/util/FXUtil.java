@@ -2,10 +2,9 @@ package camposfx.util;
 
 import java.time.LocalDate;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
-import campos.model.Company;
 import campos.model.Stock;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,7 +12,6 @@ import javafx.scene.Node;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.ValueAxis;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.DateCell;
@@ -79,28 +77,47 @@ public class FXUtil {
 		return pane;
 	}
 	
-	public static LineChart<LocalDate, Number> loadStockChart(Company c) {
+	@SuppressWarnings("unchecked")
+	public static LineChart<String, Number> loadStockChart(Map<LocalDate, Stock> subStockMap) {
 		CategoryAxis xAxis = new CategoryAxis();
 		xAxis.setLabel("Date");
 		NumberAxis yAxis = new NumberAxis();
 		yAxis.setLabel("Stock Price");
 		
-		Series<String, Number> series = new Series<>();
-		TreeMap<LocalDate, Stock> stockMap = c.getStockMap();
-		Set<LocalDate> dateSet = stockMap.keySet();
+		Series<String, Number> openSeries = new Series<>();
+		Series<String, Number> highSeries = new Series<>();
+		Series<String, Number> lowSeries = new Series<>();
+		Series<String, Number> closeSeries = new Series<>();
+		Series<String, Number> volumeSeries = new Series<>();
+
+		
+		openSeries.setName("Stock Open Series");
+		highSeries.setName("Stock High Series");
+		lowSeries.setName("Stock Low Series");
+		closeSeries.setName("Stock Close Series");
+		volumeSeries.setName("Stock Volume Series");
+		
+		Set<LocalDate> dateSet = subStockMap.keySet();
 		Iterator<LocalDate> iter = dateSet.iterator();
 		
-		for (int i = 0; i < stockMap.size(); i++) {
+		while (iter.hasNext()) {
 			LocalDate localDate = iter.next();
-			Stock s = stockMap.get(localDate);
-			Data<String, Number> data = new Data<>(localDate.toString(), s.getOpenValue());
-			series.getData().add(data);
+			Stock s = subStockMap.get(localDate);
+			Data<String, Number> openData = new Data<>(localDate.toString(), s.getOpenValue());
+			Data<String, Number> highData = new Data<>(localDate.toString(), s.getHighValue());
+			Data<String, Number> lowData = new Data<>(localDate.toString(), s.getLowValue());
+			Data<String, Number> closeData = new Data<>(localDate.toString(), s.getCloseValue());
+			Data<String, Number> volumeData = new Data<>(localDate.toString(), s.getVolume());
+
+			openSeries.getData().add(openData);
+			highSeries.getData().add(highData);
+			lowSeries.getData().add(lowData);
+			closeSeries.getData().add(closeData);
+			volumeSeries.getData().add(volumeData);
 		}
 		
-		series.setName(c.getName());
-		
-		LineChart lineChart = new LineChart(xAxis, yAxis);
-		lineChart.getData().add(series);
+		LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
+		lineChart.getData().addAll(openSeries, highSeries, lowSeries, closeSeries, volumeSeries);
 		return lineChart;
 	}
 }

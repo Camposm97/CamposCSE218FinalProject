@@ -12,9 +12,13 @@ import camposfx.util.FXUtil;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 public class StockRangePickerPane extends BorderPane {
 	private Label lblAvg;
@@ -66,27 +70,32 @@ public class StockRangePickerPane extends BorderPane {
 		}
 		
 		public void calcAveragePrices() {
-			Map<LocalDate, Stock> subMap = c.getStockMap().subMap(oldDate, lateDate.plusDays(1));			
-			Set<LocalDate> dateSet = subMap.keySet();
+			Map<LocalDate, Stock> subStockMap = c.getStockMap().subMap(oldDate, lateDate.plusDays(1));			
+			Set<LocalDate> dateSet = subStockMap.keySet();
+			
+			Stage stage = new Stage();
+			LineChart<String, Number> lineChart = FXUtil.loadStockChart(subStockMap);
+			stage.setScene(new Scene(new StackPane(lineChart)));
+			stage.show();
 			
 			avgOpen = 0; avgHigh = 0; avgLow = 0; avgClose = 0; avgVolume = 0;
 			
 			for (LocalDate localDate : dateSet) {
-				Stock stock = subMap.get(localDate);
+				Stock stock = subStockMap.get(localDate);
 				avgOpen += stock.getOpenValue();
 				avgHigh += stock.getHighValue();
 				avgLow += stock.getLowValue();
 				avgClose += stock.getCloseValue();
 				avgVolume += stock.getVolume();
-				System.out.println(stock);
+//				System.out.println(stock);
 			}
 			
-			avgOpen /= subMap.size();
-			avgHigh /= subMap.size();
-			avgLow /= subMap.size();
-			avgClose /= subMap.size();
-			avgVolume /= subMap.size();
-
+			avgOpen /= subStockMap.size();
+			avgHigh /= subStockMap.size();
+			avgLow /= subStockMap.size();
+			avgClose /= subStockMap.size();
+			avgVolume /= subStockMap.size();
+			
 			displayAvgValues();
 			
 //			System.out.println();
