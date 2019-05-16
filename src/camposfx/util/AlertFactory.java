@@ -1,5 +1,7 @@
 package camposfx.util;
 
+import java.time.LocalDate;
+import java.util.Map;
 import java.util.Optional;
 
 import campos.model.Company;
@@ -68,5 +70,21 @@ public class AlertFactory {
 		alert.setHeaderText(Random.emitErrorMsg());
 		alert.setContentText(msg);
 		alert.showAndWait();
+	}
+
+	public static void emitGraph(Map<LocalDate, Stock> subMap) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Graphing...");
+		alert.setHeaderText("Do you wish to graph the range of the stock prices you selected?");
+		
+		ButtonType btYes = new ButtonType("Yes", ButtonData.YES);
+		ButtonType btNo = new ButtonType("No", ButtonData.NO);
+		
+		alert.getButtonTypes().setAll(btYes, btNo);
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == btYes) {
+			FXUtil.emitStockCharts(subMap);
+		}
 	}
 }

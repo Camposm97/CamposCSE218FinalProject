@@ -9,6 +9,7 @@ import campos.model.Stock;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -16,10 +17,14 @@ import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class FXUtil {
 	public static final Insets DEFAULT_INSETS = new Insets(10);
@@ -71,38 +76,51 @@ public class FXUtil {
 	
 	public static StackPane loadBackground() {
 		ImageView iv = ImgUtil.loadImgV(ImgUtil.BACKGROUND_MAIN);
-		iv.setOpacity(0.25);
+		iv.setOpacity(0.5);
 		StackPane pane = new StackPane(iv);
 		pane.setPadding(new Insets(50, 200, 50, 200));
+		
+		iv.setPreserveRatio(true);
+		iv.fitWidthProperty().bind(pane.widthProperty().multiply(0.70));
+		iv.fitHeightProperty().bind(pane.heightProperty().multiply(0.70));
+		
 		return pane;
 	}
-	
-	@SuppressWarnings("unchecked")
-	public static LineChart<String, Number> loadStockChart(Map<LocalDate, Stock> subStockMap) {
-		CategoryAxis xAxis = new CategoryAxis();
-		xAxis.setLabel("Date");
-		NumberAxis yAxis = new NumberAxis();
-		yAxis.setLabel("Stock Price");
+		
+	public static void emitStockCharts(Map<LocalDate, Stock> subMap) {
+		CategoryAxis xAxis1 = new CategoryAxis();
+		xAxis1.setLabel("Date");
+		NumberAxis yAxis1 = new NumberAxis();
+		yAxis1.setLabel("Stock Price");
+		
+		CategoryAxis xAxis2 = new CategoryAxis();
+		xAxis2.setLabel("Date");
+		NumberAxis yAxis2 = new NumberAxis();
+		yAxis2.setLabel("Stock Price");
+		
+		CategoryAxis xAxis3 = new CategoryAxis();
+		xAxis3.setLabel("Date");
+		NumberAxis yAxis3 = new NumberAxis();
+		yAxis3.setLabel("Stock Volume");
 		
 		Series<String, Number> openSeries = new Series<>();
 		Series<String, Number> highSeries = new Series<>();
 		Series<String, Number> lowSeries = new Series<>();
 		Series<String, Number> closeSeries = new Series<>();
-		Series<String, Number> volumeSeries = new Series<>();
+		Series<String, Number> volSeries = new Series<>();
 
-		
 		openSeries.setName("Stock Open Series");
 		highSeries.setName("Stock High Series");
 		lowSeries.setName("Stock Low Series");
 		closeSeries.setName("Stock Close Series");
-		volumeSeries.setName("Stock Volume Series");
+		volSeries.setName("Stock Volume Series");
 		
-		Set<LocalDate> dateSet = subStockMap.keySet();
+		Set<LocalDate> dateSet = subMap.keySet();
 		Iterator<LocalDate> iter = dateSet.iterator();
 		
 		while (iter.hasNext()) {
 			LocalDate localDate = iter.next();
-			Stock s = subStockMap.get(localDate);
+			Stock s = subMap.get(localDate);
 			Data<String, Number> openData = new Data<>(localDate.toString(), s.getOpenValue());
 			Data<String, Number> highData = new Data<>(localDate.toString(), s.getHighValue());
 			Data<String, Number> lowData = new Data<>(localDate.toString(), s.getLowValue());
@@ -113,11 +131,39 @@ public class FXUtil {
 			highSeries.getData().add(highData);
 			lowSeries.getData().add(lowData);
 			closeSeries.getData().add(closeData);
-			volumeSeries.getData().add(volumeData);
+			volSeries.getData().add(volumeData);
 		}
 		
-		LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
-		lineChart.getData().addAll(openSeries, highSeries, lowSeries, closeSeries, volumeSeries);
-		return lineChart;
+		LineChart<String, Number> lineChartOpenClose = new LineChart<>(xAxis1, yAxis1);
+		lineChartOpenClose.setTitle("Stock Open vs. Close Monitor");
+		lineChartOpenClose.getData().add(openSeries);
+		lineChartOpenClose.getData().add(closeSeries);
+		
+		LineChart<String, Number> lineChartHighLow = new LineChart<>(xAxis2, yAxis2);
+		lineChartHighLow.setTitle("Stock High vs. Low Monitor");
+		lineChartHighLow.getData().add(highSeries);
+		lineChartHighLow.getData().add(lowSeries);
+		
+		LineChart<String, Number> lineChartVol = new LineChart<>(xAxis3, yAxis3);
+		lineChartVol.setTitle("Stock Volume Monitor");
+		lineChartVol.getData().add(volSeries);
+		
+		Tab tab1 = new Tab("Open vs. Close Chart");
+		tab1.setContent(lineChartOpenClose);
+		
+		Tab tab2 = new Tab("High vs. Low Chart");
+		tab2.setContent(lineChartHighLow);
+		
+		Tab tab3 = new Tab("Volume Chart");
+		tab3.setContent(lineChartVol);
+		
+		TabPane tabPane = new TabPane();
+		tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+		tabPane.getTabs().addAll(tab1, tab2, tab3);
+		
+		Stage stage = new Stage();
+		ImgUtil.loadStageIcon(stage);
+		stage.setScene(new Scene(tabPane));
+		stage.show();
 	}
 }

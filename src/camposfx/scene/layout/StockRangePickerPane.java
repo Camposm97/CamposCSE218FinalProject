@@ -7,28 +7,26 @@ import java.util.Set;
 import campos.model.Company;
 import campos.model.Stock;
 import camposfx.scene.control.AverageTextField;
+import camposfx.scene.control.MyLabel;
 import camposfx.scene.control.StockDatePicker;
+import camposfx.util.AlertFactory;
 import camposfx.util.FXUtil;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.chart.LineChart;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import javafx.scene.text.Font;
 
 public class StockRangePickerPane extends BorderPane {
-	private Label lblAvg;
+	private MyLabel lblAvg;
 	private AverageTextField tfOpen, tfHigh, tfLow, tfClose, tfVolume;
 	private StockDatePicker oldestDatePicker;
 	private StockDatePicker latestDatePicker;
 	private Company c;
 
 	public StockRangePickerPane(StockSearchPane oldStockPane, StockSearchPane lateStockPane) {
-		this.lblAvg = new Label("Average:");
+		this.lblAvg = new MyLabel("Avg:", Font.font(20));
 		this.tfOpen = new AverageTextField("Open Value");
 		this.tfHigh = new AverageTextField("High Value");
 		this.tfLow = new AverageTextField("Low Value");
@@ -70,45 +68,31 @@ public class StockRangePickerPane extends BorderPane {
 		}
 		
 		public void calcAveragePrices() {
-			Map<LocalDate, Stock> subStockMap = c.getStockMap().subMap(oldDate, lateDate.plusDays(1));			
-			Set<LocalDate> dateSet = subStockMap.keySet();
-			
-			Stage stage = new Stage();
-			LineChart<String, Number> lineChart = FXUtil.loadStockChart(subStockMap);
-			stage.setScene(new Scene(new StackPane(lineChart)));
-			stage.show();
+			Map<LocalDate, Stock> subMap = c.getStockMap().subMap(oldDate, lateDate.plusDays(1));			
+			Set<LocalDate> dateSet = subMap.keySet();
 			
 			avgOpen = 0; avgHigh = 0; avgLow = 0; avgClose = 0; avgVolume = 0;
 			
 			for (LocalDate localDate : dateSet) {
-				Stock stock = subStockMap.get(localDate);
+				Stock stock = subMap.get(localDate);
 				avgOpen += stock.getOpenValue();
 				avgHigh += stock.getHighValue();
 				avgLow += stock.getLowValue();
 				avgClose += stock.getCloseValue();
 				avgVolume += stock.getVolume();
-//				System.out.println(stock);
 			}
 			
-			avgOpen /= subStockMap.size();
-			avgHigh /= subStockMap.size();
-			avgLow /= subStockMap.size();
-			avgClose /= subStockMap.size();
-			avgVolume /= subStockMap.size();
-			
+			avgOpen /= subMap.size();
+			avgHigh /= subMap.size();
+			avgLow /= subMap.size();
+			avgClose /= subMap.size();
+			avgVolume /= subMap.size();
 			displayAvgValues();
-			
-//			System.out.println();
-//			System.out.println("Average Open Value: " + avgOpenValue);
-//			System.out.println("Average High Value: " + avgHighValue);
-//			System.out.println("Average Low Value: " + avgLowValue);
-//			System.out.println("Average Close Value: " + avgCloseValue);
-//			System.out.println("Average Volume: " + avgVolume);
-//			System.out.println();
+			AlertFactory.emitGraph(subMap);
 		}
 		
 		public void displayAvgValues() {
-			lblAvg.setText("Average: (" + oldDate + " - " + lateDate + ")");
+			lblAvg.setText("Avg: (" + oldDate + " - " + lateDate + ")");
 			tfOpen.setText(String.format("%-10.2f", avgOpen));
 			tfHigh.setText(String.format("%-10.2f", avgHigh));
 			tfLow.setText(String.format("%-10.2f", avgLow));
