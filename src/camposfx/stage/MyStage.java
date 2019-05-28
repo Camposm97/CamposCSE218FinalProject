@@ -7,6 +7,7 @@ import campos.model.Company;
 import camposfx.event.ExitHandler;
 import camposfx.scene.layout.MyBorderPane;
 import camposfx.util.ImgUtil;
+import javafx.scene.ImageCursor;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -21,7 +22,10 @@ public class MyStage extends Stage {
 		this.root = new MyBorderPane(companyBag);
 		ImgUtil.loadStageIcon(this);
 		this.setTitle(TITLE);
-		this.setScene(new Scene(root, 1000, 800));
+		Scene scene = new Scene(root);
+		scene.setCursor(new ImageCursor((ImgUtil.loadImg(ImgUtil.ICON_SWORD))));
+		this.setScene(scene);
+//		this.setScene(new Scene(root, 1000, 800));
 		this.setOnCloseRequest(new ExitHandler<WindowEvent>(companyBag));
 	}
 }

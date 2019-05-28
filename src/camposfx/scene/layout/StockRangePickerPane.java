@@ -88,7 +88,7 @@ public class StockRangePickerPane extends BorderPane {
 			avgClose /= subMap.size();
 			avgVolume /= subMap.size();
 			displayAvgValues();
-			AlertFactory.emitGraph(subMap);
+			AlertFactory.emitGraph("(" + oldDate + " - " + lateDate + ")", subMap);
 		}
 		
 		public void displayAvgValues() {

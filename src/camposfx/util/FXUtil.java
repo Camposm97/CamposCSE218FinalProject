@@ -87,7 +87,7 @@ public class FXUtil {
 		return pane;
 	}
 		
-	public static void emitStockCharts(Map<LocalDate, Stock> subMap) {
+	public static void emitStockCharts(String dateRange, Map<LocalDate, Stock> subMap) {
 		CategoryAxis xAxis1 = new CategoryAxis();
 		xAxis1.setLabel("Date");
 		NumberAxis yAxis1 = new NumberAxis();
@@ -135,17 +135,17 @@ public class FXUtil {
 		}
 		
 		LineChart<String, Number> lineChartOpenClose = new LineChart<>(xAxis1, yAxis1);
-		lineChartOpenClose.setTitle("Stock Open vs. Close Monitor");
+		lineChartOpenClose.setTitle("Stock Open vs. Close Monitor " + dateRange);
 		lineChartOpenClose.getData().add(openSeries);
 		lineChartOpenClose.getData().add(closeSeries);
 		
 		LineChart<String, Number> lineChartHighLow = new LineChart<>(xAxis2, yAxis2);
-		lineChartHighLow.setTitle("Stock High vs. Low Monitor");
+		lineChartHighLow.setTitle("Stock High vs. Low Monitor " + dateRange);
 		lineChartHighLow.getData().add(highSeries);
 		lineChartHighLow.getData().add(lowSeries);
 		
 		LineChart<String, Number> lineChartVol = new LineChart<>(xAxis3, yAxis3);
-		lineChartVol.setTitle("Stock Volume Monitor");
+		lineChartVol.setTitle("Stock Volume Monitor " + dateRange);
 		lineChartVol.getData().add(volSeries);
 		
 		Tab tab1 = new Tab("Open vs. Close Chart");
@@ -163,6 +163,7 @@ public class FXUtil {
 		
 		Stage stage = new Stage();
 		ImgUtil.loadStageIcon(stage);
+		stage.setTitle("Stock Monitoring System " + dateRange);
 		stage.setScene(new Scene(tabPane));
 		stage.show();
 	}

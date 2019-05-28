@@ -72,11 +72,11 @@ public class AlertFactory {
 		alert.showAndWait();
 	}
 
-	public static void emitGraph(Map<LocalDate, Stock> subMap) {
+	public static void emitGraph(String dateRange, Map<LocalDate, Stock> subMap) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Graphing...");
+		alert.setTitle(MyStage.TITLE);
 		alert.setHeaderText("Do you wish to graph the range of the stock prices you selected?");
-		
+		alert.setContentText("Please choose one of the following:");
 		ButtonType btYes = new ButtonType("Yes", ButtonData.YES);
 		ButtonType btNo = new ButtonType("No", ButtonData.NO);
 		
@@ -84,7 +84,7 @@ public class AlertFactory {
 		
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == btYes) {
-			FXUtil.emitStockCharts(subMap);
+			FXUtil.emitStockCharts(dateRange, subMap);
 		}
 	}
 }

@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class ImgUtil {
+	public static final String ICON_SWORD = "resources/images/icons/cursor.png";
 	public static final String ICON_MAIN = "resources/images/icons/main.png";
 	public static final String ICON_EXIT = "resources/images/icons/exit.png";
 	public static final String ICON_EXIT_BIG = "resources/images/icons/exitBig.png";
